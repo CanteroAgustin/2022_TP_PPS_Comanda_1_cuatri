@@ -14,20 +14,19 @@ export default function RootNavigator() {
   const { user, setUser } = useContext(AuthenticatedUserContext);
   const [isLoading, setIsLoading] = useState(true);
 
+  const setCompleteUser = (loggedUser) => {
+    db.collection("usuarios").doc(loggedUser.uid)
+      .onSnapshot((doc) => {
+        setUser({ ...doc.data() })
+      });
+  }
+
   useEffect(() => {
     // onAuthStateChanged returns an unsubscriber
     const unsubscribeAuth = auth.onAuthStateChanged(async authenticatedUser => {
       try {
-        await (authenticatedUser ? setUser({ ...authenticatedUser }) : setUser(null));
-        db.collection('usuarios').onSnapshot((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            const { email, password } = doc.data();
-            if (authenticatedUser?.email === email) {
-              const user = doc.data();
-              setUser({ ...authenticatedUser, ...user });
-            }
-          });
-        })
+        await (authenticatedUser ? setCompleteUser(authenticatedUser) : setUser(null));
+
         setIsLoading(false);
       } catch (error) {
         console.log(error);

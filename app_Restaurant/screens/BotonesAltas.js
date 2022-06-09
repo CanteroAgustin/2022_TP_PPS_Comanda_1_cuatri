@@ -18,7 +18,7 @@ const BotonesAltas = (props) => {
           alignItems: "center",
         }}
         onPress={() => {
-          navigation.navigate("Alta", {
+          navigation.navigate("Signup", {
             tipoAlta: tipoAlta,
           });
         }}

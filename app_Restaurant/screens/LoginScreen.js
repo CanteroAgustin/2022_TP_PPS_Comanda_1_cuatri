@@ -128,7 +128,7 @@ export default function LoginScreen({ navigation }) {
               onPress={() => {
                 props.resetForm();
                 setLoginError('');
-                navigation.navigate('Signup');
+                navigation.navigate('Altas');
               }}
               title='Registrarme'
               backgroundColor='#ff7961'
@@ -138,7 +138,7 @@ export default function LoginScreen({ navigation }) {
                 height: 60
               }}
             />
-            {/* <Button
+            <Button
               onPress={() => {
                 props.setFieldValue('email', 'admin@admin.com');
                 props.setFieldValue('password', '123456');
@@ -155,7 +155,7 @@ export default function LoginScreen({ navigation }) {
                 borderStyle: 'dashed',
                 height: 100
               }}
-            />
+            />{/*
             <Button
               onPress={() => {
                 props.setFieldValue('email', 'invitado@invitado.com');
