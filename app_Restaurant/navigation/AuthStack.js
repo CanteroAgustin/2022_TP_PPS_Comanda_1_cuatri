@@ -5,7 +5,6 @@ import LoginScreen from "../screens/LoginScreen";
 import SignupScreen from "../screens/SignupScreen";
 import SplashScreen from "../screens/SplashScreen";
 import BotonesAltas from "../screens/BotonesAltas";
-
 const Stack = createStackNavigator();
 
 export default function AuthStack() {

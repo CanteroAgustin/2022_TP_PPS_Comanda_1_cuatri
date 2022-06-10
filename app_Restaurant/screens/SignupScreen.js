@@ -150,16 +150,6 @@ export default function SignupScreen(props) {
             >
               <Text style={styles.textButton}>Ya tengo una cuenta.</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                props.resetForm();
-                navigation.navigate("BotonesAltas");
-                setSignupError("");
-              }}
-            >
-              <Text style={styles.textButton}>Altas.</Text>
-            </TouchableOpacity>
           </View>
         )}
       </Formik>
