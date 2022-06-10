@@ -38,10 +38,10 @@ const BotonesAltas = (props) => {
         alignItems: "center",
       }}
     >
-      {goToAlta("violet", "Alta dueño / Supervisor", "DuenioSupervisor")}
+      {goToAlta("violet", "Alta dueño / Supervisor", "dueño / Supervisor")}
       {goToAlta("blue", "Alta de empleados", "Empleados")}
       {goToAlta("purple", "Alta de mesa", "Mesa")}
-      {goToAlta("orange", "Alta de Producto", "Producto")}
+      {goToAlta("orange", "Alta de Producto", "Productos")}
     </View>
   );
 };
