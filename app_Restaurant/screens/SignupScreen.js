@@ -57,17 +57,18 @@ export default function SignupScreen(props) {
             setIsLoading(true);
             auth
               .createUserWithEmailAndPassword(values.email, values.password)
-              .then(() => {
-                db.collection("usuarios").add({
+              .then(data => {
+                db.collection("usuarios").doc(data.user.uid).set({
                   email: values.email,
                   password: values.password,
-                  rol: "admin",
-                  status: "pendiente",
+                  rol: 'admin',
+                  status: 'pendiente',
+                  uid: data.user.uid
                 });
                 setTimeout(() => {
                   setIsLoading(false);
                   resetForm();
-                }, 3000);
+                }, 3000)
               })
               .catch((error) => {
                 resetForm();
@@ -354,16 +355,6 @@ export default function SignupScreen(props) {
               }}
             >
               <Text style={styles.textButton}>Ya tengo una cuenta.</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                props.resetForm();
-                navigation.navigate("BotonesAltas");
-                setSignupError("");
-              }}
-            >
-              <Text style={styles.textButton}>Altas.</Text>
             </TouchableOpacity>
           </View>
         )}

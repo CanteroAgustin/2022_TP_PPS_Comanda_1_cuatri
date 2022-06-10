@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
 
 export default function HomeScreen() {
 
+  const { user } = useContext(AuthenticatedUserContext);
+
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
+      <Text>{user.uid}</Text>
     </View>
   );
 }

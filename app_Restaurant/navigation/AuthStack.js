@@ -10,13 +10,7 @@ const Stack = createStackNavigator();
 
 export default function AuthStack() {
   return (
-    <Stack.Navigator
-      screenOptions={
-        {
-          // headerShown: false,
-        }
-      }
-    >
+    <Stack.Navigator>
       <Stack.Screen
         name="SplashScreen"
         component={SplashScreen}
@@ -28,11 +22,15 @@ export default function AuthStack() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="Altas"
+        component={BotonesAltas}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="Signup"
         component={SignupScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="BotonesAltas" component={BotonesAltas} />
     </Stack.Navigator>
   );
 }
