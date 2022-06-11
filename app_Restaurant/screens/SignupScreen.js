@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   ScrollView,
   Dimensions,
+  Image,
 } from "react-native";
 import { Button, InputField, ErrorMessage } from "../components";
 import Firebase from "../config/firebase";
@@ -16,7 +17,15 @@ import { signupValidationSchema } from "../schemas/signupSchema";
 import Spinner from "react-native-loading-spinner-overlay";
 import SizesTxt from "../utils/Sizes";
 import { Picker } from "@react-native-picker/picker";
-
+import * as ImagePicker from "expo-image-picker";
+import Sizes_ from "../utils/Sizes";
+import ColorsRestaurant from "../utils/ColorsRestaurant";
+import {
+  Entypo,
+  FontAwesome,
+  Octicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 const auth = Firebase.auth();
 const db = Firebase.firestore();
 
@@ -29,6 +38,8 @@ export default function SignupScreen(props) {
   const [signupError, setSignupError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(false);
+  const [image, setImage] = useState(null);
+
   selectedLanguage;
   const { validateForm } = useFormikContext;
 
@@ -43,6 +54,23 @@ export default function SignupScreen(props) {
     } else if (rightIcon === "eye-off") {
       setRightIcon("eye");
       setPasswordVisibility(!passwordVisibility);
+    }
+  };
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log("result PickImage");
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
     }
   };
 
@@ -155,6 +183,72 @@ export default function SignupScreen(props) {
       </Formik>
     );
   };
+  const getImgUser = () => {
+    return (
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          marginVertical: 10,
+        }}
+      >
+        {image ? (
+          <Image
+            source={{ uri: image }}
+            style={{ flex: 1, width: "100%", height: 150, borderRadius: 5 }}
+          />
+        ) : (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              width: "100%",
+              height: 150,
+              backgroundColor: ColorsRestaurant.colorLetraGris,
+              alignSelf: "center",
+              justifyContent: "center",
+              alignContent: "center",
+              borderRadius: 5,
+            }}
+            onPress={pickImage}
+          >
+            <FontAwesome
+              name="camera-retro"
+              size={SizesTxt.big + 40}
+              color={"black"}
+              style={{ alignSelf: "center" }}
+            />
+          </TouchableOpacity>
+        )}
+        <View
+          style={{
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            padding: 10,
+            flex: 1,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: Sizes_.normal,
+              width: "90%",
+              textAlign: "center",
+              color: image ? "green" : "black",
+            }}
+          >
+            {image ? "Listo!" : "Selecciona una imagen de tu galeria"}
+          </Text>
+          <FontAwesome
+            name={image ? "check-square" : "hand-o-left"}
+            size={Sizes_.big}
+            style={{ alignSelf: "center", marginLeft: 0 }}
+            color={image ? "green" : "black"}
+          />
+        </View>
+      </View>
+    );
+  };
+
   const formUserV2 = () => {
     const onSubmitUser = (values) => {
       alert("enviado form alternativo");
@@ -253,6 +347,8 @@ export default function SignupScreen(props) {
             {props.errors.cuil && props.dirty && props.touched.cuil && (
               <Text style={styles.errorMsg}>{props.errors.cuil}</Text>
             )}
+
+            {getImgUser()}
 
             <InputField
               inputStyle={{
