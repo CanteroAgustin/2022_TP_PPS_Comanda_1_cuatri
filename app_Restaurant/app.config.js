@@ -1,35 +1,44 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 export default {
   expo: {
-    name: 'app_Restaurant',
-    slug: 'app_Restaurant',
-    version: '1.0.0',
-    orientation: 'portrait',
-    icon: './assets/icon.png',
+    name: "app_Restaurant",
+    slug: "app_Restaurant",
+    version: "1.0.0",
+    orientation: "portrait",
+    icon: "./assets/icon.png",
     userInterfaceStyle: "light",
+    plugins: [
+      [
+        "expo-image-picker",
+        {
+          photosPermission:
+            "The app accesses your photos to let you share them with your friends.",
+        },
+      ],
+    ],
     splash: {
-      image: './assets/splash.png',
-      resizeMode: 'cover',
-      backgroundColor: '#ffffff'
+      image: "./assets/splash.png",
+      resizeMode: "cover",
+      backgroundColor: "#ffffff",
     },
     updates: {
-      fallbackToCacheTimeout: 0
+      fallbackToCacheTimeout: 0,
     },
-    assetBundlePatterns: ['**/*'],
+    assetBundlePatterns: ["**/*"],
     ios: {
-      supportsTablet: true
+      supportsTablet: true,
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: './assets/adaptive-icon.png',
-        backgroundColor: '#FFFFFF'
+        foregroundImage: "./assets/adaptive-icon.png",
+        backgroundColor: "#FFFFFF",
       },
       package: "com.appRestaurante",
-      versionCode: 1
+      versionCode: 1,
     },
     web: {
-      favicon: './assets/favicon.png'
+      favicon: "./assets/favicon.png",
     },
     extra: {
       apiKey: process.env.API_KEY,
@@ -38,7 +47,7 @@ export default {
       storageBucket: process.env.STORAGE_BUCKET,
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
-      databaseUrl: process.env.DATABASE_URL
-    }
-  }
+      databaseUrl: process.env.DATABASE_URL,
+    },
+  },
 };
