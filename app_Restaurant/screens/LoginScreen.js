@@ -168,7 +168,7 @@ export default function LoginScreen({ navigation }) {
                 setIsMockLogin(true);
               }}
               title='Prueba invitado'
-              backgroundColor='yellow'
+              backgroundColor='red'
               titleSize={20}
               containerStyle={{
                 marginBottom: 1,
