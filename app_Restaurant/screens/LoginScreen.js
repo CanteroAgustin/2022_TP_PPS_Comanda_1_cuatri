@@ -160,7 +160,7 @@ export default function LoginScreen({ navigation }) {
                 borderStyle: 'dashed',
                 height: 100
               }}
-            />{/*
+            />
             <Button
               onPress={() => {
                 props.setFieldValue('email', 'invitado@invitado.com');
@@ -179,6 +179,7 @@ export default function LoginScreen({ navigation }) {
                 height: 100
               }}
             />
+            {/*
             <Button
               onPress={() => {
                 props.setFieldValue('email', 'tester@tester.com');
